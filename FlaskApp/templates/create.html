@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title%}<title>Добавление объявления</title>{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Добавление объявления</h1>
+    <form method="post" enctype=multipart/form-data>
+        <input type="text" class="form-control" name="title" id="title" placeholder="Введите название">
+        <input type="number" class="form-control" name="price" id="price" placeholder="Введите цену">
+        <textarea name="text" id="text" placeholder="Введите описание"
+                  class="form-control"></textarea>
+        <select class="form-control" id="cat_select" name="cat_select">
+            {% for category in data %}
+            <option value="{{category.id}} ">{{category.name}}</option>
+              {% endfor %}
+        </select>
+        <input type="file" name="file" multiple>
+
+        <button class="btn-success" type="submit">Добавить товар</button>
+
+    </form>
+
+
+</div>
+
+{% endblock %}

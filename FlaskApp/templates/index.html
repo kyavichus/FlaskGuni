@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block title%}<title>Барахолка РАОСа/Главная</title>{% endblock %}
+
+{% block body %}
+<main>
+    {% if get_flashed_messages()  %}
+
+    <div class="alert alert-danger">{{ get_flashed_messages()[0] }}</div>
+
+    {% endif %}
+
+  <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+  {% for el in data.items %}
+    <div class="col">
+        <div class="card mb-4 rounded-3 shadow-sm">
+          <div class="card-header py-3">
+            <h4 class="my-0 fw-normal">{{ el }}</h4>
+          </div>
+          <div class="card-body">
+            <img class="card-img-top img-responsive" src="{{ url_for('static', filename = el.img_path.split(',')[0]) }}">{{ el }}</img>
+            <h1 class="card-title pricing-card-title w-100">{{ el.price }}<small class="text-muted fw-light">руб.</small></h1>
+            <p class="card-text">{{ el.text[0:50] }}...<a href="/item/{{ el.id }}" class='btn btn-outline-primary'>Подробнее</a></p>
+
+           <div class="d-flex justify-content-between align-items-center">
+
+               <small class="text-muted">{{ el.created.strftime('%H:%M - %m.%d.%Y') }}</small>
+                   <a href="\categories\{{ el.category.slug }}">{{ el.category.name }}</a>
+        </div>
+      </div>
+        </div>
+    </div>
+  {% endfor %}
+  </div>
+      <!-- Pagination Links-->
+<div class="text-center">
+    <a href="{{ url_for('index', page=data.prev_num) }}"
+       class="btn btn-outline-dark
+       {% if data.page == 1 %}disabled{% endif %}">
+        &laquo;
+    </a>
+<!-- Loop through the number of pages to display a link for each-->
+    {% for page_num in data.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+{% if page_num %}
+<!-- Check for the active page and set the link to "Active"-->
+            {% if data.page == page_num %}
+            <a href="{{ url_for('index', page=page_num) }}"
+               class="btn btn-dark">
+                {{ page_num }}
+            </a>
+            {% else %}
+            <a href="{{ url_for('index', page=page_num) }}"
+               class="btn btn-outline-dark">
+                {{ page_num }}
+            </a>
+            {% endif %}
+        {% else %}
+            ...
+        {% endif %}
+    {% endfor %}
+    <a href="{{ url_for('index', page=data.next_num) }}"
+       class="btn btn-outline-dark
+       {% if data.page == data.pages %}disabled{% endif %}">
+        &raquo;
+    </a>
+</div>
+<p class="text-center mt-3">
+   Showing page {{ data.page }} of {{ data.pages }}
+</p>
+
+
+  </main>
+{% endblock %}
+
+

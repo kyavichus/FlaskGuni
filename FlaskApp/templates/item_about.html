@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title%}<title>Барахло {{data.title}}</title>{% endblock %}
+
+{% block body %}
+<main>
+
+  <div class="row row-cols-1 row-cols-md-1 mb-3 text-center">
+  <div class="col">
+        <div class="card mb-4 rounded-3 shadow-sm">
+          <div class="card-header py-3">
+            <h4 class="my-0 fw-normal">{{ data.title }}</h4>
+          </div>
+          <div class="card-body">
+              {% for el in data.img_path.split(',') %}
+                {% if el %}
+            <img class="img-fluid" src="{{ url_for('static', filename = el) }}"></img>
+                {% endif %}
+              {% endfor %}
+            <h1 class="card-title pricing-card-title">{{ data.price }}<small class="text-muted fw-light">руб.</small></h1>
+            <p class="col-md-8 fs-4">{{ data.text }}</p>
+              <div class="d-flex justify-content-between align-items-center">
+              <a href='{{url_for("item_edit", id =data.id)}}' class="btn btn-outline-primary">Редактировать</a>
+              <small class="text-muted">Просмотров: {{ data.views }}</small>
+              </div>
+          </div>
+        </div>
+  </div>
+
+  </div>
+
+
+  </main>
+{% endblock %}
+
+
