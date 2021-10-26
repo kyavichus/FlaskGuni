@@ -204,7 +204,7 @@ def create():
             if file and allowed_file(file.filename):
                 filename = secure_filename(file.filename)
                 path = os.path.join(app.config['UPLOAD_FOLDER'], datetime.now().strftime('%Y-%m-%d'))
-                os.mkdir(os.path.join('/static', path))
+                os.mkdir(os.path.join('FlaskApp/FlaskApp/static', path))
                 try:
                     os.mkdir(os.path.join('FlaskApp/static', path))
                 except Exception as ex:
