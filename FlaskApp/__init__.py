@@ -214,6 +214,7 @@ def create():
                 full_filename = os.path.join(path, filename)
                 full_filenames = full_filenames + os.path.join(path, filename) + ','
                 print(len(full_filenames))
+                file.save(os.path.join('FlaskApp/FlaskApp/static', full_filename))
                 try:
                     file.save(os.path.join('FlaskApp/FlaskApp/static', full_filename))
                 except Exception as ex:
