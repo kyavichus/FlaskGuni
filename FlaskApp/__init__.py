@@ -205,17 +205,17 @@ def create():
                 filename = secure_filename(file.filename)
                 path = os.path.join(app.config['UPLOAD_FOLDER'], datetime.now().strftime('%Y-%m-%d'))
                 os.mkdir(os.path.join('FlaskApp/FlaskApp/static', path))
-                try:
-                    os.mkdir(os.path.join('FlaskApp/static', path))
-                except Exception as ex:
-                    # flash(ex)
-                    return redirect(request.url)
+                # try:
+                #     os.mkdir(os.path.join('FlaskApp/static', path))
+                # except Exception as ex:
+                #     # flash(ex)
+                #     return redirect(request.url)
                 filename = str(randint(100000, 999999))
                 full_filename = os.path.join(path, filename)
                 full_filenames = full_filenames + os.path.join(path, filename) + ','
                 print(len(full_filenames))
                 try:
-                    file.save(os.path.join('FlaskApp/static', full_filename))
+                    file.save(os.path.join('FlaskApp/FlaskApp/static', full_filename))
                 except Exception as ex:
                     flash(ex)
                     return redirect(request.url)
