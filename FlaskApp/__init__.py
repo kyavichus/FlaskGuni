@@ -207,7 +207,7 @@ def create():
                 try:
                     os.mkdir(os.path.join('FlaskApp/static', path))
                 except Exception as ex:
-                    flash(ex)
+                    # flash(ex)
                     return redirect(request.url)
                 filename = str(randint(100000, 999999))
                 full_filename = os.path.join(path, filename)
