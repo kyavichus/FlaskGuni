@@ -191,7 +191,7 @@ def create():
         cat_select = request.form["cat_select"]
         if 'file' not in request.files:
             flash('No file part')
-            return redirect(request.url)
+            return redirect(url_for('index'))
         file = request.files.getlist('file')
         full_filenames = ''
         for file in file:
@@ -200,7 +200,7 @@ def create():
        # submit an empty part without filename
             if file.filename == '':
                 flash('No selected file')
-                return redirect(request.url)
+                return redirect(url_for('index'))
             if file and allowed_file(file.filename):
                 filename = secure_filename(file.filename)
                 path = os.path.join(app.config['UPLOAD_FOLDER'], datetime.now().strftime('%Y-%m-%d'))
