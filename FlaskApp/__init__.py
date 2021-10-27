@@ -225,7 +225,7 @@ def create():
         try:
             db.session.add(item)
             db.session.commit()
-            return "redirect('/')"
+            return redirect(url_for('index'))
         except:
             return "Ахтунг, все плохо"
     else:
