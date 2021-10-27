@@ -229,6 +229,7 @@ def create():
         except:
             return "Ахтунг, все плохо"
     else:
+        categories = Category.query.all()
         return render_template('create.html', data = categories, for_sidebar=list_cts)
 
 if __name__ == '__main__':
