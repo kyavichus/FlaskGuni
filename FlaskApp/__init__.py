@@ -183,7 +183,7 @@ def allowed_file(filename):
 
 @app.route('/create', methods=['Post', 'GET'])
 def create():
-    categories = Category.query.all()
+    # categories = Category.query.all()
     if request.method == 'POST':
         title = request.form['title'].lower()
         price = request.form['price']
