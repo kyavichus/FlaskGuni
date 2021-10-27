@@ -205,11 +205,11 @@ def create():
                 filename = secure_filename(file.filename)
                 path = os.path.join(app.config['UPLOAD_FOLDER'], datetime.now().strftime('%Y-%m-%d'))
                 
-                # try:
-                #     os.mkdir(os.path.join('FlaskApp/static', path))
-                # except Exception as ex:
-                #     # flash(ex)
-                #     return redirect(request.url)
+                try:
+                    os.mkdir(os.path.join('FlaskApp/static', path))
+                except Exception as ex:
+                    # flash(ex)
+                    return redirect(request.url)
                 filename = str(randint(100000, 999999))
                 full_filename = os.path.join(path, filename)
                 full_filenames = full_filenames + os.path.join(path, filename) + ','
@@ -225,6 +225,7 @@ def create():
         try:
             db.session.add(item)
             db.session.commit()
+            flash("Добавлено на сайт")
             return redirect(url_for('index'))
         except:
             return "Ахтунг, все плохо"
