@@ -74,6 +74,7 @@ list_cts = db.session.query(Category).all()
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    list_cts = db.session.query(Category).all()
     page = request.args.get('page', type=int, default=1)
     if request.method == 'POST' and 'search_input' in request.form:
         search_input = request.form["search_input"]
@@ -183,7 +184,7 @@ def allowed_file(filename):
 
 @app.route('/create', methods=['Post', 'GET'])
 def create():
-    # categories = Category.query.all()
+    categories = Category.query.all()
     if request.method == 'POST':
         title = request.form['title'].lower()
         price = request.form['price']
