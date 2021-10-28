@@ -210,7 +210,7 @@ def create():
        #      if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             path = os.path.join(app.config['UPLOAD_FOLDER'], datetime.now().strftime('%Y-%m-%d'))
-
+            path = os.path.join(app.config['UPLOAD_FOLDER'])
             os.makedirs(os.path.join('static', path), exist_ok=True)
             # filename = str(randint(100000, 999999))
             full_filename = os.path.join(path, filename)
