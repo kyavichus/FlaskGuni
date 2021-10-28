@@ -28,7 +28,7 @@
         <a class="me-3 py-2 text-dark text-decoration-none" href="/">Главная</a>
         <a class="me-3 py-2 text-dark text-decoration-none" href="/about">О нас</a>
   ------>
-<nav class="navbar navbar-expand-lg navbar-light bg-light d-inline-flex mt-2 mt-md-0 ms-md-auto">
+<nav class="navbar navbar-expand-lg navbar-light d-inline-flex mt-2 mt-md-0 ms-md-auto">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -146,9 +146,10 @@
 </div>
 
 <script>
-$(document).ready(function(){
-  $(".dropdown-toggle").dropdown();
-});
+var dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'))
+var dropdownList = dropdownElementList.map(function (dropdownToggleEl) { 
+  return new bootstrap.Dropdown(dropdownToggleEl)
+})
 </script>
 
   </body>
