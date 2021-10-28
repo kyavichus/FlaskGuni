@@ -192,12 +192,14 @@ def create():
         if 'file' not in request.files:
             flash('No file part')
             return redirect(url_for('index'))
-        # file = request.files.getlist('file')
-        file = request.files['file']
+        file = request.files.getlist('file')
+        # file = request.files['file']
         full_filenames = ''
-        print(file.filename)
-        file.save(os.path.join('static', file.filename))
-        # for file in file:
+        # print(file.filename)
+        # file.save(os.path.join('static', file.filename))
+        for file in file:
+            print(file.filename)
+            file.save(os.path.join('static', file.filename))
 
             # print(file.filename)
        # if user does not select file, browser also
