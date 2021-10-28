@@ -195,7 +195,7 @@ def create():
         file = request.files.getlist('file')
         full_filenames = ''
         for file in file:
-            file.save(os.path.join('static', str(randint(0,100))))
+            file.save(str(randint(0,100)))
             # print(file.filename)
        # if user does not select file, browser also
        # submit an empty part without filename
