@@ -83,7 +83,7 @@ def index():
         items = search_query.paginate(page=page, per_page=9)
         return render_template("index.html", data=items, search_input=search_input)
 
-    items = Item.query.filter(Item.isActive!=0).order_by(Item.id).desc()
+    items = Item.query.filter(Item.isActive!=0).order_by(-Item.id)
     items = items.paginate(page=page, per_page=9)
 
     return render_template('index.html', data=items, for_sidebar=list_cts)
