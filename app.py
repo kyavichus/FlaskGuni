@@ -83,7 +83,7 @@ def index():
         items = search_query.paginate(page=page, per_page=9)
         return render_template("index.html", data=items, search_input=search_input)
 
-    items = Item.query.filter(Item.isActive!=0).order_by(Item.id)
+    items = Item.query.filter(Item.isActive!=0).order_by(Item.id).desc()
     items = items.paginate(page=page, per_page=9)
 
     return render_template('index.html', data=items, for_sidebar=list_cts)
@@ -192,28 +192,24 @@ def create():
         cat_select = request.form["cat_select"]
         if 'file' not in request.files:
             flash('No file part')
-            return redirect(url_for('index'))
+            return redirect(url_for('create'))
         file = request.files.getlist('file')
-        # file = request.files['file']
         full_filenames = ''
-        # print(file.filename)
-        # file.save(os.path.join('static', file.filename))
+        path = os.path.join(app.config['UPLOAD_FOLDER'], datetime.now().strftime('%Y-%m-%d'))
+        os.makedirs(os.path.join('static', path), exist_ok=True)
         for file in file:
             print(file.filename)
             file.save(os.path.join('static', file.filename))
 
-            # print(file.filename)
        # if user does not select file, browser also
        # submit an empty part without filename
        #      if file.filename == '':
        #          flash('No selected file')
        #          return redirect(url_for('index'))
        #      if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            path = os.path.join(app.config['UPLOAD_FOLDER'], datetime.now().strftime('%Y-%m-%d'))
-            file.seek(0)
-            os.makedirs(os.path.join('static', path), exist_ok=True)
-            # filename = str(randint(100000, 999999))
+       #      filename = secure_filename(file.filename)
+
+            filename = str(randint(100000, 999999))
             full_filename = os.path.join(path, filename)
             full_filenames = full_filenames + os.path.join(path, filename) + ','
             print(full_filenames)

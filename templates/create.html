@@ -4,6 +4,11 @@
 
 {% block body %}
 <div class="container">
+        {% if get_flashed_messages()  %}
+
+    <div class="alert alert-danger">{{ get_flashed_messages()[0] }}</div>
+
+    {% endif %}
     <h1>Добавление объявления</h1>
     <form method="post" enctype=multipart/form-data>
         <input type="text" class="form-control" name="title" id="title" placeholder="Введите название">
