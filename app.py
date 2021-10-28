@@ -212,11 +212,14 @@ def create():
             path = os.path.join(app.config['UPLOAD_FOLDER'], datetime.now().strftime('%Y-%m-%d'))
             path = os.path.join(app.config['UPLOAD_FOLDER'])
             os.makedirs(os.path.join('static', path), exist_ok=True)
+            os.chdir(os.path.join('static', path))
+            print(os.getcwd())
             # filename = str(randint(100000, 999999))
             full_filename = os.path.join(path, filename)
             full_filenames = full_filenames + os.path.join(path, filename) + ','
             print(full_filenames)
-            file.save(os.path.join('static', full_filename))
+            file.save(os.path.join(filename))
+            # file.save(os.path.join('static', full_filename))
             # try:
             #     file.save(os.path.join('static', full_filename))
             # except Exception as ex:
