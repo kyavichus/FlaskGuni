@@ -202,18 +202,15 @@ def create():
                 flash('No selected file')
                 return redirect(url_for('index'))
             if file and allowed_file(file.filename):
-                filename = secure_filename(file.filename)
+                # filename = secure_filename(file.filename)
                 path = os.path.join(app.config['UPLOAD_FOLDER'], datetime.now().strftime('%Y-%m-%d'))
-                
-                try:
-                    os.mkdir(os.path.join('static', path))
-                except Exception as ex:
-                    pass
+
+                os.mkdir(os.path.join('static', path), exists_ok=True)
                 filename = str(randint(100000, 999999))
                 full_filename = os.path.join(path, filename)
                 full_filenames = full_filenames + os.path.join(path, filename) + ','
                 print(len(full_filenames))
-                file.save(os.path.join('static', full_filename))
+                # file.save(os.path.join('static', full_filename))
                 try:
                     file.save(os.path.join('static', full_filename))
                 except Exception as ex:
