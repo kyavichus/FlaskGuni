@@ -184,7 +184,7 @@ def allowed_file(filename):
 
 @app.route('/create', methods=['Post', 'GET'])
 def create():
-    categories = Category.query.all()
+
     if request.method == 'POST':
         title = request.form['title'].lower()
         price = request.form['price']
@@ -228,7 +228,7 @@ def create():
             db.session.add(item)
             db.session.commit()
             flash("Добавлено на сайт")
-            return redirect(url_for('create'))
+            return redirect(url_for('index'))
         except:
             return "Ахтунг, все плохо"
     else:
