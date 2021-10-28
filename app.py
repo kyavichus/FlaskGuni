@@ -196,7 +196,7 @@ def create():
         file = request.files['file']
         full_filenames = ''
         print(file.filename)
-        file.save(os.path.join('static', str(randint(0, 100))))
+        file.save(os.path.join('static', file.filename))
         # for file in file:
 
             # print(file.filename)
