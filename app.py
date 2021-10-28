@@ -199,7 +199,6 @@ def create():
         os.makedirs(os.path.join('static', path), exist_ok=True)
         for file in file:
             print(file.filename)
-            file.save(os.path.join('static', file.filename))
 
        # if user does not select file, browser also
        # submit an empty part without filename
