@@ -211,7 +211,7 @@ def create():
        #          # filename = secure_filename(file.filename)
             path = os.path.join(app.config['UPLOAD_FOLDER'], datetime.now().strftime('%Y-%m-%d'))
 
-            os.mkdir(os.path.join('static', path), exists_ok=True)
+            os.makedirs(os.path.join('static', path), exist_ok=True)
             filename = str(randint(100000, 999999))
             full_filename = os.path.join(path, filename)
             full_filenames = full_filenames + os.path.join(path, filename) + ','
@@ -227,7 +227,7 @@ def create():
             db.session.add(item)
             db.session.commit()
             flash("Добавлено на сайт")
-            return redirect(url_for('index'))
+            return redirect(url_for('create'))
         except:
             return "Ахтунг, все плохо"
     else:
