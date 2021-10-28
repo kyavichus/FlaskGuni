@@ -183,7 +183,7 @@ def allowed_file(filename):
 
 @app.route('/create', methods=['Post', 'GET'])
 def create():
-    categories = Category.query.all()
+    # categories = Category.query.all()
     if request.method == 'POST':
         title = request.form['title'].lower()
         price = request.form['price']
@@ -210,7 +210,7 @@ def create():
        #      if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             path = os.path.join(app.config['UPLOAD_FOLDER'], datetime.now().strftime('%Y-%m-%d'))
-
+            file.seek(0)
             os.makedirs(os.path.join('static', path), exist_ok=True)
             # filename = str(randint(100000, 999999))
             full_filename = os.path.join(path, filename)
@@ -218,7 +218,7 @@ def create():
             print(full_filenames)
             # file.save(os.path.join('static', full_filename))
             try:
-                file.save(os.path.join('static/uploads', filename))
+                file.save(os.path.join('static', full_filename))
             except Exception as ex:
                 return redirect(request.url)
         item = Item(title=title, price=price, text=text, img_path=full_filenames, category_id=cat_select,
