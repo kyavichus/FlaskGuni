@@ -234,5 +234,6 @@ def create():
         categories = Category.query.all()
         return render_template('create.html', data = categories, for_sidebar=list_cts)
 
+
 if __name__ == '__main__':
     app.run(debug=True)
