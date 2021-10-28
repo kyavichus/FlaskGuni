@@ -199,23 +199,23 @@ def create():
             # print(file.filename)
        # if user does not select file, browser also
        # submit an empty part without filename
-            if file.filename == '':
-                flash('No selected file')
-                return redirect(url_for('index'))
-            if file and allowed_file(file.filename):
-                # filename = secure_filename(file.filename)
-                path = os.path.join(app.config['UPLOAD_FOLDER'], datetime.now().strftime('%Y-%m-%d'))
-
-                os.mkdir(os.path.join('static', path), exists_ok=True)
-                filename = str(randint(100000, 999999))
-                full_filename = os.path.join(path, filename)
-                full_filenames = full_filenames + os.path.join(path, filename) + ','
-                print(len(full_filenames))
-                # file.save(os.path.join('static', full_filename))
-                try:
-                    file.save(os.path.join('static', full_filename))
-                except Exception as ex:
-                    return redirect(request.url)
+       #      if file.filename == '':
+       #          flash('No selected file')
+       #          return redirect(url_for('index'))
+       #      if file and allowed_file(file.filename):
+       #          # filename = secure_filename(file.filename)
+       #          path = os.path.join(app.config['UPLOAD_FOLDER'], datetime.now().strftime('%Y-%m-%d'))
+       #
+       #          os.mkdir(os.path.join('static', path), exists_ok=True)
+       #          filename = str(randint(100000, 999999))
+       #          full_filename = os.path.join(path, filename)
+       #          full_filenames = full_filenames + os.path.join(path, filename) + ','
+       #          print(len(full_filenames))
+       #          # file.save(os.path.join('static', full_filename))
+       #          try:
+       #              file.save(os.path.join('static', full_filename))
+       #          except Exception as ex:
+       #              return redirect(request.url)
         item = Item(title=title, price=price, text=text, img_path=full_filenames, category_id=cat_select,
                     created=datetime.utcnow())
         try:
